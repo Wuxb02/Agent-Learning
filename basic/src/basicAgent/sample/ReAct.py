@@ -1,6 +1,5 @@
-
-
 import re
+import os
 from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
 from basicAgent.utils.Tool import ToolExecutor
 from jinja2 import Environment, FileSystemLoader
@@ -8,7 +7,11 @@ from basicAgent.tools.WebSearch import search
 
 
 # 设置模板环境（指定模板文件所在目录）
-env = Environment(loader=FileSystemLoader(r"G:\desktop\AgentLearning\basic\config\prompts")) 
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+env = Environment(loader=FileSystemLoader(os.path.join(BASE_DIR, "../../../config/prompts")))
+
 
 class ReActAgent:
     def __init__(self, llm_client: HelloAgentsLLM, tool_executor: ToolExecutor, max_steps: int = 5):
@@ -32,6 +35,7 @@ class ReActAgent:
             # 1. 格式化提示词
             tools_desc = self.tool_executor.getAvailableTools() #获取工具
             history_str = "\n".join(self.history)
+
             template = env.get_template("ReAct.j2") # 读取prompt
             prompt = template.render({
                 "tools": tools_desc,
