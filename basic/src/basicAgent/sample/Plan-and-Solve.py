@@ -1,10 +1,7 @@
 import ast
+from basicAgent.tools.Prompt import get_prompt
 from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
 from jinja2 import Environment, FileSystemLoader
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-env = Environment(loader=FileSystemLoader(os.path.join(BASE_DIR, "../../../config/prompts")))
 
 
 class Planner:
@@ -15,10 +12,8 @@ class Planner:
         """
         根据用户问题生成一个行动计划。
         """
-        template = env.get_template("Plan.j2") # 读取prompt
-        prompt = template.render({
-            "question": question
-        })
+        prompt = get_prompt("Planner.j2", {
+            "question": question})
         
         # 为了生成计划，我们构建一个简单的消息列表
         messages = [{"role": "user", "content": prompt}]
@@ -59,15 +54,12 @@ class Executor:
         for i, step in enumerate(plan):
             print(f"\n-> 正在执行步骤 {i+1}/{len(plan)}: {step}")
             
-
-            template = env.get_template("Solver.j2") # 读取prompt
-            prompt = template.render({
+            prompt = get_prompt("Solver.j2", {
                 "question": question,
                 "plan": plan,
                 "history": history if history else "无", # 如果是第一步，则历史为空
                 "current_step": step
             })
-
             
             messages = [{"role": "user", "content": prompt}]
             

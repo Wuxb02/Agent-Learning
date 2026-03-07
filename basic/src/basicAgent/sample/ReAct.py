@@ -2,15 +2,8 @@ import re
 import os
 from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
 from basicAgent.utils.Tool import ToolExecutor
-from jinja2 import Environment, FileSystemLoader
 from basicAgent.tools.WebSearch import search
-
-
-# 设置模板环境（指定模板文件所在目录）
-
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-env = Environment(loader=FileSystemLoader(os.path.join(BASE_DIR, "../../../config/prompts")))
+from basicAgent.tools.Prompt import get_prompt
 
 
 class ReActAgent:
@@ -36,8 +29,7 @@ class ReActAgent:
             tools_desc = self.tool_executor.getAvailableTools() #获取工具
             history_str = "\n".join(self.history)
 
-            template = env.get_template("ReAct.j2") # 读取prompt
-            prompt = template.render({
+            prompt = get_prompt("ReAct.j2", {
                 "tools": tools_desc,
                 "question": question,
                 "history": history_str
@@ -116,13 +108,6 @@ class ReActAgent:
 
 
 if __name__ == '__main__':
-    # template = env.get_template("ReAct.j2") # 读取prompt
-    # prompt = template.render({
-    #                 "tools": '1',
-    #                 "question": 'question',
-    #                 "history": 'history'
-    #             })
-    # print(prompt)
     llm_client = HelloAgentsLLM()
     tool_executor = ToolExecutor()
     search_description = "一个网页搜索引擎。当你需要回答关于时事、事实以及在你的知识库中找不到的信息时，应使用此工具。"
