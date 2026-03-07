@@ -2,6 +2,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from typing import List, Dict
+from autogen_ext.models.openai import OpenAIChatCompletionClient
 
 # 加载 .env 文件中的环境变量
 load_dotenv()
@@ -51,6 +52,16 @@ class HelloAgentsLLM:
         except Exception as e:
             print(f"❌ 调用LLM API时发生错误: {e}")
             return None
+        
+
+    def create_openai_model_client(self):
+        """创建并配置 OpenAI 模型客户端"""
+        return OpenAIChatCompletionClient(
+            model= self.model,
+            api_key=self.api_key,
+            base_url=self.base_url,
+            timeout=self.timeout
+        )
 
 # --- 客户端使用示例 ---
 if __name__ == '__main__':
