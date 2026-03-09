@@ -31,7 +31,7 @@ from typing import Dict, List, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
 
-from  import SimpleAgent, HelloAgentsLLM
+from hello_agents import SimpleAgent, HelloAgentsLLM
 
 load_dotenv()
 

@@ -16,11 +16,11 @@ SimpleAgent 不涉及工具调用或复杂推理循环，适合以下场景：
 典型用法::
 
     from hello_agents.core.config import Config
-    from hello_agents.core.llm import HelloAgentsLLM
+    from hello_agents.core.llm import baseLLM
     from hello_agents.agents.simple_agent import SimpleAgent
 
     cfg = Config.from_env()
-    llm = HelloAgentsLLM(cfg)
+    llm = baseLLM(cfg)
     agent = SimpleAgent(name="simple", llm=llm, system_prompt="你是一个助手。")
 
     reply = agent.run("你好，介绍一下自己")
@@ -32,13 +32,17 @@ from __future__ import annotations
 from typing import Optional
 import re
 
-from my_agents.tools.registry import ToolRegistry
+from hello_agents import CalculatorTool
+
+
 from my_agents.core.agent import Agent
 from my_agents.core.config import Config
-from my_agents.core.llm import HelloAgentsLLM
+from my_agents.core.llm import  baseLLM
 from my_agents.core.message import Message
 
 from dotenv import load_dotenv
+
+from my_agents.tools.registry import ToolRegistry
 
 load_dotenv()
 
@@ -51,10 +55,10 @@ class SimpleAgent(Agent):
     def __init__(
         self,
         name: str,
-        llm: HelloAgentsLLM,
+        llm: baseLLM,
         system_prompt: Optional[str] = None,
         config: Optional[Config] = None,
-        tool_registry: Optional['ToolRegistry'] = None,
+        tool_registry: Optional[ToolRegistry] = None,
         enable_tool_calling: bool = True
     ):
         super().__init__(name, llm, system_prompt, config)
@@ -295,7 +299,7 @@ class SimpleAgent(Agent):
 if __name__ == '__main__':
     
     # 创建LLM实例
-    llm = HelloAgentsLLM()
+    llm = baseLLM(provider="dashscope")
 
     # 测试1:基础对话Agent（无工具）
     print("=== 测试1:基础对话 ===")
@@ -310,11 +314,11 @@ if __name__ == '__main__':
 
     # 测试2:带工具的Agent
     print("=== 测试2:工具增强对话 ===")
-    tool_registry = `ToolRegistry`()
+    tool_registry = ToolRegistry()
     calculator = CalculatorTool()
     tool_registry.register_tool(calculator)
 
-    enhanced_agent = MySimpleAgent(
+    enhanced_agent = SimpleAgent(
         name="增强助手",
         llm=llm,
         system_prompt="你是一个智能助手，可以使用工具来帮助用户。",

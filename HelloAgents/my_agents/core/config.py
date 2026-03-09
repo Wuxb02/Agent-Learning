@@ -26,8 +26,7 @@ hello_agents.core.config
     cfg = Config.from_env()
 """
 
-from __future__ import annotations
-
+"""配置管理"""
 import os
 from typing import Optional, Dict, Any
 from pydantic import BaseModel

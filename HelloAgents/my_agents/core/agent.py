@@ -18,7 +18,7 @@ hello_agents.core.agent
 
 from __future__ import annotations
 
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import Optional
 
 from my_agents.core.config import Config
