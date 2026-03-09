@@ -31,8 +31,8 @@ from __future__ import annotations
 
 from typing import Callable
 
-from hello_agents.tools.base import BaseTool
-from hello_agents.core.exceptions import ToolNotFoundError
+from my_agents.tools.base import BaseTool
+from my_agents.core.exceptions import ToolNotFoundError
 
 
 class ToolRegistry:

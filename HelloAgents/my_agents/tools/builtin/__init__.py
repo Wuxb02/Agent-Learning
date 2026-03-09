@@ -9,7 +9,7 @@ hello_agents.tools.builtin
     - ``SearchTool``     : 关键词搜索工具（默认使用模拟实现，可替换为真实 API）
 """
 
-from hello_agents.tools.builtin.calculator import CalculatorTool
-from hello_agents.tools.builtin.search import SearchTool
+from my_agents.tools.builtin.calculator import CalculatorTool
+from my_agents.tools.builtin.search import SearchTool
 
 __all__ = ["CalculatorTool", "SearchTool"]

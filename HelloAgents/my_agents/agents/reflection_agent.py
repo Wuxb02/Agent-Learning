@@ -28,10 +28,10 @@ from __future__ import annotations
 
 from typing import Optional
 
-from hello_agents.core.agent import Agent
-from hello_agents.core.config import Config
-from hello_agents.core.llm import HelloAgentsLLM
-from hello_agents.core.message import Message, MessageRole
+from my_agents.core.agent import Agent
+from my_agents.core.config import Config
+from my_agents.core.llm import HelloAgentsLLM
+from my_agents.core.message import Message, MessageRole
 
 
 class ReflectionAgent(Agent):

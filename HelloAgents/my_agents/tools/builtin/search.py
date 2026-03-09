@@ -36,7 +36,7 @@ from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
 
-from hello_agents.tools.base import BaseTool
+from my_agents.tools.base import BaseTool
 
 
 @runtime_checkable

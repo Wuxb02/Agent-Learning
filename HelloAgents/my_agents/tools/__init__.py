@@ -11,10 +11,10 @@ hello_agents.tools
     AsyncExecutor —— 异步工具执行器
 """
 
-from hello_agents.tools.base import BaseTool
-from hello_agents.tools.registry import ToolRegistry
-from hello_agents.tools.chain import ToolChain
-from hello_agents.tools.async_executor import AsyncExecutor
+from my_agents.tools.base import BaseTool
+from my_agents.tools.registry import ToolRegistry
+from my_agents.tools.chain import ToolChain
+from my_agents.tools.async_executor import AsyncExecutor
 
 __all__ = [
     "BaseTool",

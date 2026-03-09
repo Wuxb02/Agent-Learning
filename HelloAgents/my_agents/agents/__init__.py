@@ -11,10 +11,10 @@ Agent 实现层，提供多种开箱即用的 Agent 推理范式。
     PlanAndSolveAgent  —— 先规划后执行的两阶段 Agent
 """
 
-from hello_agents.agents.simple_agent import SimpleAgent
-from hello_agents.agents.react_agent import ReActAgent
-from hello_agents.agents.reflection_agent import ReflectionAgent
-from hello_agents.agents.plan_solve_agent import PlanAndSolveAgent
+from my_agents.agents.simple_agent import SimpleAgent
+from my_agents.agents.react_agent import ReActAgent
+from my_agents.agents.reflection_agent import ReflectionAgent
+from my_agents.agents.plan_solve_agent import PlanAndSolveAgent
 
 __all__ = [
     "SimpleAgent",

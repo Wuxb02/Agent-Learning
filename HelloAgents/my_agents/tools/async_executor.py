@@ -33,8 +33,8 @@ from __future__ import annotations
 import asyncio
 from typing import Any
 
-from hello_agents.tools.base import BaseTool
-from hello_agents.core.exceptions import ToolExecutionError
+from my_agents.tools.base import BaseTool
+from my_agents.core.exceptions import ToolExecutionError
 
 
 class AsyncExecutor:

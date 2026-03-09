@@ -29,8 +29,8 @@ ToolChain 允许将多个工具串联成流水线：
 
 from __future__ import annotations
 
-from hello_agents.tools.base import BaseTool
-from hello_agents.core.exceptions import ToolExecutionError
+from my_agents.tools.base import BaseTool
+from my_agents.core.exceptions import ToolExecutionError
 
 
 class ToolChain:

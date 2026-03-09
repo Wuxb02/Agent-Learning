@@ -13,11 +13,11 @@ hello_agents.core
     HelloAgentsError —— 框架根异常
 """
 
-from hello_agents.core.agent import Agent
-from hello_agents.core.llm import HelloAgentsLLM
-from hello_agents.core.message import Message, MessageRole
-from hello_agents.core.config import Config
-from hello_agents.core.exceptions import HelloAgentsError
+from my_agents.core.agent import Agent
+from my_agents.core.llm import HelloAgentsLLM
+from my_agents.core.message import Message, MessageRole
+from my_agents.core.config import Config
+from my_agents.core.exceptions import HelloAgentsError
 
 __all__ = [
     "Agent",
