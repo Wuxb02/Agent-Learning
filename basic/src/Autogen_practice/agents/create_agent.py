@@ -2,8 +2,11 @@
 
 import asyncio
 
-from autogen_agentchat.agents import AssistantAgent, UserProxyAgent
+from pathlib import Path
+
+from autogen_agentchat.agents import AssistantAgent, CodeExecutorAgent
 from autogen_agentchat.ui import Console
+from autogen_ext.code_executors.local import LocalCommandLineCodeExecutor
 from Autogen_practice.utils.HelloAgentsLLM import HelloAgentsLLM
 from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_agentchat.conditions import TextMentionTermination
@@ -18,7 +21,7 @@ class AgentFactory:
             "Engineer": self._create_engineer(self.model_client),
             "ProductManager": self._create_product_manager(self.model_client),
             "CodeReviewer": self._create_code_reviewer(self.model_client),
-            "UserProxy": self._create_user_proxy()
+            "CodeExecutor": self._create_code_executor()
             }
 
                 # 定义团队聊天和协作规则
@@ -27,7 +30,7 @@ class AgentFactory:
                 self.agents["ProductManager"],
                 self.agents["Engineer"],
                 self.agents["CodeReviewer"],
-                self.agents["UserProxy"]
+                self.agents["CodeExecutor"]
             ],
             termination_condition=TextMentionTermination("TERMINATE"),
             max_turns=20)
@@ -100,7 +103,7 @@ class AgentFactory:
     4. 提供具体的修改建议
     5. 评估代码的整体质量
 
-    请提供具体的审查意见，完成后说"代码审查完成，请用户代理测试"。"""
+    请提供具体的审查意见，完成后说"代码审查完成，请执行代码"。"""
 
         return AssistantAgent(
             name="CodeReviewer",
@@ -108,17 +111,20 @@ class AgentFactory:
             system_message=system_message,
         )
 
-    def _create_user_proxy(self):
-        """创建用户代理智能体"""
-        return UserProxyAgent(
-            name="UserProxy",
-            description="""用户代理，负责以下职责：
-    1. 代表用户提出开发需求
-    2. 执行最终的代码实现
-    3. 验证功能是否符合预期
-    4. 提供用户反馈和建议
-
-    完成测试后请回复 TERMINATE。""")
+    def _create_code_executor(self):
+        """创建代码执行代理，自动运行对话中的代码块"""
+        work_dir = Path(__file__).parent / "code_output"
+        work_dir.mkdir(exist_ok=True)
+        code_executor = LocalCommandLineCodeExecutor(
+            work_dir=work_dir,
+            timeout=60,
+        )
+        return CodeExecutorAgent(
+            name="CodeExecutor",
+            code_executor=code_executor,
+            description="代码执行代理，自动提取并运行对话中的代码块，"
+            "返回执行结果。执行完成后回复 TERMINATE。",
+        )
 
 
 async def run_software_development_team():
