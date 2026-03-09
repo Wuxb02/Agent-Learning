@@ -1,6 +1,6 @@
 import ast
-from basicAgent.tools.Prompt import get_prompt
-from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
+from BasicAgent.tools.Prompt import get_prompt
+from BasicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
 from jinja2 import Environment, FileSystemLoader
 
 

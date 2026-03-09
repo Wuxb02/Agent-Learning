@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from serpapi import SerpApiClient
 import os
-from basicAgent.utils.Tool import ToolExecutor
+from BasicAgent.utils.Tool import ToolExecutor
 
 
 def search(query: str) -> str:

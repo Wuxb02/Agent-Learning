@@ -1,9 +1,9 @@
 import re
 import os
-from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
-from basicAgent.utils.Tool import ToolExecutor
-from basicAgent.tools.WebSearch import search
-from basicAgent.tools.Prompt import get_prompt
+from BasicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
+from BasicAgent.utils.Tool import ToolExecutor
+from BasicAgent.tools.WebSearch import search
+from BasicAgent.tools.Prompt import get_prompt
 
 
 class ReActAgent:

@@ -1,6 +1,6 @@
 from typing import List, Dict, Any, Literal, Optional
-from basicAgent.tools.Prompt import get_prompt
-from basicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
+from BasicAgent.tools.Prompt import get_prompt
+from BasicAgent.utils.HelloAgentsLLM import HelloAgentsLLM
 
 class Memory:
     """

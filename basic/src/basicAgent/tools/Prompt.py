@@ -2,8 +2,6 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
-import main
-
 
 # 设置模板环境（指定模板文件所在目录）
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
